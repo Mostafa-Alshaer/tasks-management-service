@@ -1,9 +1,7 @@
 package com.mostafa.springboot.ddd.task.repository.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -12,23 +10,18 @@ import java.util.Date;
 
 @Entity
 @Table(name = "task")
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"created_at", "updated_at"},
-        allowGetters = true)
 public class TaskEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, updatable = false, name="created_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
+    @Column(nullable = false, name="created_at")
+    @CreationTimestamp
     private Date createdAt;
 
     @Column(nullable = false, name="updated_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate
+    @UpdateTimestamp
     private Date updatedAt;
 
     @NotBlank
