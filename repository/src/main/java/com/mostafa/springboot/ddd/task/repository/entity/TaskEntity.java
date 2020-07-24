@@ -1,18 +1,20 @@
 package com.mostafa.springboot.ddd.task.repository.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "task")
 public class TaskEntity extends BaseEntity{
 
-    @NotBlank
+    @Column(nullable = false)
     private String description;
 
-    @NotNull
+    @Column(nullable = false)
     private Boolean completed;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity userEntity;
 
     public String getDescription() {
         return description;
@@ -28,5 +30,13 @@ public class TaskEntity extends BaseEntity{
 
     public void setCompleted(Boolean completed) {
         this.completed = completed;
+    }
+
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 }
