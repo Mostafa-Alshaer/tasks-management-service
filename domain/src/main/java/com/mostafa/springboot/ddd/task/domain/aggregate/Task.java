@@ -1,38 +1,9 @@
 package com.mostafa.springboot.ddd.task.domain.aggregate;
 
-import java.util.Date;
+public class Task extends Base {
 
-public class Task {
-
-    Long id;
-    Date createdAt;
-    Date updatedAt;
-    String description;
-    Boolean completed;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+    private String description;
+    private Boolean completed;
 
     public String getDescription() {
         return description;
