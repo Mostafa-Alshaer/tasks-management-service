@@ -1,11 +1,20 @@
-package com.mostafa.springboot.ddd.task.domain.aggregate;
+package com.mostafa.springboot.ddd.task.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import javax.validation.constraints.Null;
 import java.util.Date;
 
-public abstract class Base {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public abstract class BaseDTO {
 
+    @Null(message = "id field can't be passed by the apis' client")
     private Long id;
+
+    @Null(message = "createdAt field can't be passed by the apis' client")
     private Date createdAt;
+
+    @Null(message = "updatedAt field can't be passed by the apis' client")
     private Date updatedAt;
 
     public Long getId() {

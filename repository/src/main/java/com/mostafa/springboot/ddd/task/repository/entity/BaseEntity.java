@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @MappedSuperclass
-abstract public class BaseEntity {
+public abstract class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,6 +3,8 @@ package com.mostafa.springboot.ddd.task.controller;
 import com.mostafa.springboot.ddd.task.domain.aggregate.User;
 import com.mostafa.springboot.ddd.task.domain.service.IUserService;
 
+import com.mostafa.springboot.ddd.task.dto.UserDTO;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +21,13 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @PostMapping()
-    public ResponseEntity add(@RequestBody User user){
+    public ResponseEntity add(@RequestBody UserDTO userDTO){
         try {
-            user.setId(null);
+            User user = modelMapper.map(userDTO, User.class);
             return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
         } catch (Exception ex){
             LOGGER.error("An error occurred during saving a new user, {}", ex);
@@ -30,15 +35,6 @@ public class UserController {
         }
     }
 
-    @PutMapping()
-    public ResponseEntity update(@RequestBody User user){
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(userService.update(user));
-        } catch (Exception ex){
-            LOGGER.error("An error occurred during updating a user, {}", ex);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred during updating a user");
-        }
-    }
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id){
         try {

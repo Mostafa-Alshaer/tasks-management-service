@@ -1,11 +1,10 @@
 package com.mostafa.springboot.ddd.task.repository.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
+//TODO: password hashing
 public class UserEntity extends BaseEntity {
 
     @Column(nullable = false)
@@ -19,7 +18,8 @@ public class UserEntity extends BaseEntity {
 
     private Integer age;
 
-    private String[] tokens;
+    @Column(length = 3000)
+    private String tokens;
 
     public String getName() {
         return name;
@@ -53,11 +53,11 @@ public class UserEntity extends BaseEntity {
         this.age = age;
     }
 
-    public String[] getTokens() {
+    public String getTokens() {
         return tokens;
     }
 
-    public void setTokens(String[] tokens) {
+    public void setTokens(String tokens) {
         this.tokens = tokens;
     }
 }
